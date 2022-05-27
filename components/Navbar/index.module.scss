@@ -20,6 +20,7 @@
             font-size: 18px;
             padding: 20px 0;
             position: relative;
+            text-transform: uppercase;
     
             &.active {
                 color: #1e80ff;
@@ -39,6 +40,19 @@
 
             &:hover:before {
                 display: block;
+            }
+        }
+    }
+
+    .operationArea {
+        .opearateButton {
+            margin-right: 30px;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: bold;
+
+            &.write {
+                color: #909090;
             }
         }
     }
