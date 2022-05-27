@@ -5,25 +5,41 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-.logoArea {
-    font-size: 30px;
-    font-weight: bold;
-    margin-right: 60px;
-}
-
-.linkArea {
-    .navItem {
-        color: #909090;
-        font-weight: 500;
+    .logoArea {
+        font-size: 30px;
+        font-weight: bold;
         margin-right: 60px;
-        font-size: 18px;
-        padding: 0 20px;
+    }
+    
+    .linkArea {
+        .navItem {
+            color: #909090;
+            font-weight: 500;
+            margin-right: 60px;
+            font-size: 18px;
+            padding: 20px 0;
+            position: relative;
+    
+            &.active {
+                color: #1e80ff;
+            }
 
-        &:active, &:hover {
-            color: #1e80ff;
+            &:before {
+                content: "";
+                position: absolute;
+                top: auto;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                height: 2px;
+                background-color: #1e80ff;
+                display: none;
+            }
+
+            &:hover:before {
+                display: block;
+            }
         }
     }
 }
-
