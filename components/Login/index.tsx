@@ -20,6 +20,14 @@ const Login = (props: LoginProps) => {
     console.log("click login");
   };
 
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
   return (
     <div className={styles.loginArea}>
       <div className={styles.loginContent}>
@@ -29,22 +37,28 @@ const Login = (props: LoginProps) => {
             X
           </div>
         </div>
-        <div className={styles.phone}>
+        <div className={styles.loginPhone}>
           <input
             type="text"
             name="phone"
-            placeholder="Please input phone number"
+            className={styles.textInput}
+            placeholder="Mobile Number"
             value={form.phone}
+            autoComplete="off"
+            onChange={handleChange}
           />
         </div>
         <div className={styles.verifyCode}>
           <input
             type="text"
             name="verifyCode"
-            placeholder="Verify Code"
+            className={styles.textInput}
+            placeholder="SMS Verify Code"
+            autoComplete="off"
             value={form.verifyCode}
+            onChange={handleChange}
           />
-          <span>Verify Code</span>
+          <span className={styles.fetchCode}>Send Code</span>
         </div>
         <div className={styles.loginBtn} onClick={handleLogin}>
           Login
@@ -52,7 +66,7 @@ const Login = (props: LoginProps) => {
         <div className={styles.others}>Login with Github</div>
         <div className={styles.privacyPolicy}>
           Agree When Regist
-          <a href="https://juejin.cn/privacy" target="_blank">
+          <a className={styles.privacy} href="https://juejin.cn/privacy" target="_blank">
             Privacy
           </a>
         </div>
