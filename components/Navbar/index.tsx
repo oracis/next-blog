@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "antd";
@@ -7,7 +6,7 @@ import navs from "./config";
 import Login from "components/Login";
 import styles from "./index.module.scss";
 
-const Header: NextPage = () => {
+const Navbar = () => {
   const { pathname } = useRouter();
   const [isShowLogin, setIsShowLogin] = useState(false);
 
@@ -56,9 +55,9 @@ const Header: NextPage = () => {
           Login
         </Button>
       </section>
-      {isShowLogin ? <Login onClose={handleClose} /> : null}
+      <Login isShowLogin={isShowLogin} onClose={handleClose} />
     </div>
   );
 };
 
-export default Header;
+export default Navbar;

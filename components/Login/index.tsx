@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import Countdown from "components/Countdown";
 import styles from "./index.module.scss";
 
 interface LoginProps {
+  isShowLogin: boolean;
   onClose: () => void;
 }
 
 const Login = (props: LoginProps) => {
-  const { onClose } = props;
+  const { isShowLogin, onClose } = props;
   const [form, setForm] = useState({
     phone: "",
     verifyCode: "",
   });
+  const [isShowCode, setIsShowCode] = useState(false);
 
   const handleClose = () => {
     onClose();
@@ -20,7 +23,7 @@ const Login = (props: LoginProps) => {
     console.log("click login");
   };
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm({
       ...form,
@@ -28,7 +31,15 @@ const Login = (props: LoginProps) => {
     });
   };
 
-  return (
+  const handleSend = () => {
+    setIsShowCode(true);
+  };
+
+  const handleCounddownEnd = () => {
+    setIsShowCode(false);
+  };
+
+  return isShowLogin ? (
     <div className={styles.loginArea}>
       <div className={styles.loginContent}>
         <div className={styles.header}>
@@ -58,7 +69,13 @@ const Login = (props: LoginProps) => {
             value={form.verifyCode}
             onChange={handleChange}
           />
-          <span className={styles.fetchCode}>Send Code</span>
+          <span className={styles.sendCode} onClick={handleSend}>
+            {isShowCode ? (
+              <Countdown time={10} onEnd={handleCounddownEnd} />
+            ) : (
+              "Send Code"
+            )}
+          </span>
         </div>
         <div className={styles.loginBtn} onClick={handleLogin}>
           Login
@@ -66,13 +83,17 @@ const Login = (props: LoginProps) => {
         <div className={styles.others}>Login with Github</div>
         <div className={styles.privacyPolicy}>
           Agree When Regist
-          <a className={styles.privacy} href="https://juejin.cn/privacy" target="_blank">
+          <a
+            className={styles.privacy}
+            href="https://juejin.cn/privacy"
+            target="_blank"
+          >
             Privacy
           </a>
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Login;
