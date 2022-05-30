@@ -2,12 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { format } from "date-fns";
 import md5 from "md5";
 import { encode } from "js-base64";
+import { withIronSessionApiRoute } from "iron-session/next";
 import request from "service/request";
-
-interface SmsResult {
-  statusCode: string;
-  templateSMS: {};
-}
+import { ironOptions } from "configs";
+import { ISession, SmsResult } from "pages/api/index";
 
 const sendCode = async (req: NextApiRequest, res: NextApiResponse) => {
   const { to = "", templateId = 1 } = req.body;
@@ -35,17 +33,24 @@ const sendCode = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       }
     );
+    const { statusCode, statusMsg } = data;
+
     console.log("smsCode", smsCode);
-    if (data?.statusCode === "000000") {
+
+    if (statusCode === "000000") {
+      const session = req.session as ISession;
+      session.smsCode = smsCode;
+      await session.save();
+      console.log("session.smsCode", session.smsCode);
       return res.status(200).json({
         code: 0,
         msg: "",
-        data: smsCode,
+        data: process.env.NODE_ENV === "development" ? smsCode : "",
       });
     } else {
-      return res.status(500).json({
-        code: -1,
-        msg: "Unknown Error",
+      return res.status(200).json({
+        code: statusCode,
+        msg: statusMsg,
         data: "",
       });
     }
@@ -58,4 +63,4 @@ const sendCode = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default sendCode;
+export default withIronSessionApiRoute(sendCode, ironOptions);

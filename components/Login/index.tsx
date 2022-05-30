@@ -5,12 +5,12 @@ import styles from "./index.module.scss";
 import { message } from "antd";
 
 interface LoginProps {
-  isShowLogin: boolean;
+  isShowLogin?: boolean;
   onClose: () => void;
 }
 
 const Login = (props: LoginProps) => {
-  const { isShowLogin, onClose } = props;
+  const { onClose } = props;
   const [form, setForm] = useState({
     phone: "",
     verifyCode: "",
@@ -34,7 +34,6 @@ const Login = (props: LoginProps) => {
   };
 
   const handleSend = () => {
-    // setIsShowCode(true);
     if (!form?.phone) {
       message.warning("Please input mobile phone");
       return;
@@ -54,7 +53,7 @@ const Login = (props: LoginProps) => {
     setIsShowCode(false);
   };
 
-  return isShowLogin ? (
+  return (
     <div className={styles.loginArea}>
       <div className={styles.loginContent}>
         <div className={styles.header}>
@@ -102,13 +101,14 @@ const Login = (props: LoginProps) => {
             className={styles.privacy}
             href="https://juejin.cn/privacy"
             target="_blank"
+            rel="noreferrer"
           >
             Privacy
           </a>
         </div>
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default Login;

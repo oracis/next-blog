@@ -55,7 +55,10 @@ const Navbar = () => {
           Login
         </Button>
       </section>
-      <Login isShowLogin={isShowLogin} onClose={handleClose} />
+      {isShowLogin ? (
+        <Login onClose={handleClose} />
+      ) : null}
+      {/* <Login isShowLogin={isShowLogin} onClose={handleClose} /> */}
     </div>
   );
 };
