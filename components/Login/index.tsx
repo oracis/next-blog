@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
+import request from "service/request";
 import Countdown from "components/Countdown";
 import styles from "./index.module.scss";
+import { message } from "antd";
 
 interface LoginProps {
   isShowLogin: boolean;
@@ -32,7 +34,20 @@ const Login = (props: LoginProps) => {
   };
 
   const handleSend = () => {
-    setIsShowCode(true);
+    // setIsShowCode(true);
+    if (!form?.phone) {
+      message.warning("Please input mobile phone");
+      return;
+    }
+    request
+      .post("/api/user/sendCode", {
+        to: form?.phone,
+        templateId: 1,
+      })
+      .then((res: any) => {
+        setIsShowCode(true);
+        console.log(res);
+      });
   };
 
   const handleCounddownEnd = () => {
