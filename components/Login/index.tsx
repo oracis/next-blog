@@ -1,11 +1,10 @@
 import { ChangeEvent, useState } from "react";
+import { message } from "antd";
 import request from "service/request";
 import Countdown from "components/Countdown";
 import styles from "./index.module.scss";
-import { message } from "antd";
 
 interface LoginProps {
-  isShowLogin?: boolean;
   onClose: () => void;
 }
 
@@ -13,7 +12,7 @@ const Login = (props: LoginProps) => {
   const { onClose } = props;
   const [form, setForm] = useState({
     phone: "",
-    verifyCode: "",
+    smsCode: "",
   });
   const [isShowCode, setIsShowCode] = useState(false);
 
@@ -22,7 +21,15 @@ const Login = (props: LoginProps) => {
   };
 
   const handleLogin = () => {
-    console.log("click login");
+    request
+      .post("/api/user/login", {
+        ...form,
+      })
+      .then((res: any) => {
+        if (res?.code === 0) {
+          onClose && onClose();
+        }
+      });
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +50,9 @@ const Login = (props: LoginProps) => {
         to: form?.phone,
         templateId: 1,
       })
-      .then((res: any) => {
+      .then((value: any) => {
         setIsShowCode(true);
-        console.log(res);
+        console.log(value);
       });
   };
 
@@ -76,11 +83,11 @@ const Login = (props: LoginProps) => {
         <div className={styles.verifyCode}>
           <input
             type="text"
-            name="verifyCode"
+            name="smsCode"
             className={styles.textInput}
             placeholder="SMS Verify Code"
             autoComplete="off"
-            value={form.verifyCode}
+            value={form.smsCode}
             onChange={handleChange}
           />
           <span className={styles.sendCode} onClick={handleSend}>

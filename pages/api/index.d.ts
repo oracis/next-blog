@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { IronSession } from "iron-session";
 
 type SessionExtension = {
