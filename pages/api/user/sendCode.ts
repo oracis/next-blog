@@ -36,6 +36,9 @@ const sendCode = async (req: NextApiRequest, res: NextApiResponse) => {
     const { statusCode, statusMsg } = data;
 
     console.log("smsCode", smsCode);
+    const session = req.session as ISession;
+    session.smsCode = smsCode;
+    await session.save();
 
     if (statusCode === "000000") {
       const session = req.session as ISession;

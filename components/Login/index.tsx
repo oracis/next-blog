@@ -21,9 +21,12 @@ const Login = (props: LoginProps) => {
   };
 
   const handleLogin = () => {
+    console.log("login form", form);
+    
     request
       .post("/api/user/login", {
         ...form,
+        identify_type: "phone",
       })
       .then((res: any) => {
         if (res?.code === 0) {
