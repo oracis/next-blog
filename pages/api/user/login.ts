@@ -7,8 +7,6 @@ import { ISession } from "pages/api/index";
 import { prepareConnection } from "db";
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("req.body", req.body);
-
   const { smsCode = "", phone = "", identify_type = "phone" } = req?.body;
   const session = req.session as ISession;
   const savedSmsCode = session.smsCode;
@@ -29,14 +27,14 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
       const {
         user: { id, nickname, avatar },
       } = userAuth;
-      session.id = id;
+      session.userId = id;
       session.nickname = nickname;
       session.avatar = avatar;
       await session.save();
       return res.status(200).json({
         code: 0,
         msg: "Login Sucessfully",
-        data: { id, nickname, avatar },
+        data: { userId: id, nickname, avatar },
       });
     } else {
       const user = new User();
@@ -56,7 +54,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
       const {
         user: { id, nickname, avatar },
       } = userAuthResult;
-      session.id = id;
+      session.userId = id;
       session.nickname = nickname;
       session.avatar = avatar;
       await session.save();
@@ -64,7 +62,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json({
         code: 0,
         msg: "New User created, Login sucessfully",
-        data: { id, nickname, avatar },
+        data: { userId: id, nickname, avatar },
       });
     }
   } else {

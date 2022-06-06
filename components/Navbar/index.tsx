@@ -1,13 +1,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button } from "antd";
+import { Avatar, Button, Dropdown, Menu } from "antd";
+import { ProfileOutlined, LogoutOutlined } from "@ant-design/icons";
 import navs from "./config";
 import Login from "components/Login";
 import styles from "./index.module.scss";
+import { useStore } from "store";
 
 const Navbar = () => {
   const { pathname } = useRouter();
+  const store = useStore();
+  const { userId, avatar } = store.user.userInfo;
+
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const handleWrite = () => {
@@ -20,6 +25,21 @@ const Navbar = () => {
 
   const handleClose = () => {
     setIsShowLogin(false);
+  };
+
+  const renderDropdownOverlay = () => {
+    return (
+      <Menu>
+        <Menu.Item>
+          <ProfileOutlined />
+          &nbsp; Profile
+        </Menu.Item>
+        <Menu.Item>
+          <LogoutOutlined />
+          &nbsp; Logout
+        </Menu.Item>
+      </Menu>
+    );
   };
 
   return (
@@ -47,18 +67,23 @@ const Navbar = () => {
         >
           Write
         </Button>
-        <Button
-          className={styles.opearateButton}
-          type="primary"
-          onClick={handleLogin}
-        >
-          Login
-        </Button>
+        {userId ? (
+          <>
+            <Dropdown overlay={renderDropdownOverlay()} placement="bottomLeft">
+              <Avatar src={avatar} size={32} />
+            </Dropdown>
+          </>
+        ) : (
+          <Button
+            className={styles.opearateButton}
+            type="primary"
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+        )}
       </section>
-      {isShowLogin ? (
-        <Login onClose={handleClose} />
-      ) : null}
-      {/* <Login isShowLogin={isShowLogin} onClose={handleClose} /> */}
+      {isShowLogin ? <Login onClose={handleClose} /> : null}
     </div>
   );
 };

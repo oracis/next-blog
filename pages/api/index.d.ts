@@ -3,7 +3,7 @@ import { IronSession } from "iron-session";
 
 type SessionExtension = {
   smsCode: number;
-  id: number;
+  userId: number;
   nickname: string;
   avatar: string;
 };

@@ -1,6 +1,9 @@
-
 import "reflect-metadata";
-import { DataSource, Connection, getConnection, createConnection } from "typeorm";
+import {
+  Connection,
+  getConnection,
+  createConnection,
+} from "typeorm";
 import { User, UserAuth } from "./entity";
 
 const type = process.env.DATABASE_TYPE;
@@ -18,8 +21,8 @@ export const prepareConnection = () => {
       try {
         const staleConnection = getConnection();
         await staleConnection.close();
-      } catch (e) { 
-        console.log(e);
+      } catch (e) {
+        console.error(e);
       }
 
       const connection = await createConnection({

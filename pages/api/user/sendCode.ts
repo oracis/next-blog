@@ -44,7 +44,6 @@ const sendCode = async (req: NextApiRequest, res: NextApiResponse) => {
       const session = req.session as ISession;
       session.smsCode = smsCode;
       await session.save();
-      console.log("session.smsCode", session.smsCode);
       return res.status(200).json({
         code: 0,
         msg: "",

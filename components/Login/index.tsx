@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { message } from "antd";
 import request from "service/request";
+import { useStore } from "store";
 import Countdown from "components/Countdown";
 import styles from "./index.module.scss";
 
@@ -15,14 +16,13 @@ const Login = (props: LoginProps) => {
     smsCode: "",
   });
   const [isShowCode, setIsShowCode] = useState(false);
+  const store = useStore();
 
   const handleClose = () => {
     onClose();
   };
 
   const handleLogin = () => {
-    console.log("login form", form);
-    
     request
       .post("/api/user/login", {
         ...form,
@@ -30,7 +30,10 @@ const Login = (props: LoginProps) => {
       })
       .then((res: any) => {
         if (res?.code === 0) {
+          store.user.setUserInfo(res?.data);
           onClose && onClose();
+        } else {
+          message.error(res?.msg);
         }
       });
   };
@@ -55,7 +58,6 @@ const Login = (props: LoginProps) => {
       })
       .then((value: any) => {
         setIsShowCode(true);
-        console.log(value);
       });
   };
 
