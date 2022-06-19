@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { observer } from "mobx-react-lite";
 import { message } from "antd";
 import request from "service/request";
 import { useStore } from "store";
@@ -123,4 +124,4 @@ const Login = (props: LoginProps) => {
   );
 };
 
-export default Login;
+export default observer(Login);

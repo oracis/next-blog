@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { observer } from "mobx-react-lite";
 import { Avatar, Button, Dropdown, Menu } from "antd";
 import { ProfileOutlined, LogoutOutlined } from "@ant-design/icons";
 import navs from "./config";
 import Login from "components/Login";
 import styles from "./index.module.scss";
 import { useStore } from "store";
+import request from "service/request";
 
 const Navbar = () => {
   const { pathname } = useRouter();
@@ -27,14 +29,24 @@ const Navbar = () => {
     setIsShowLogin(false);
   };
 
+  const handleGotoPersonalPage = () => {};
+
+  const handleLogout = () => {
+    request.post("/api/user/logout").then((res: any) => {
+      if (res?.code === 0) {
+        store.user.setUserInfo({});
+      }
+    });
+  };
+
   const renderDropdownOverlay = () => {
     return (
       <Menu>
-        <Menu.Item>
+        <Menu.Item onClick={handleGotoPersonalPage}>
           <ProfileOutlined />
           &nbsp; Profile
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item onClick={handleLogout}>
           <LogoutOutlined />
           &nbsp; Logout
         </Menu.Item>
@@ -88,4 +100,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default observer(Navbar);

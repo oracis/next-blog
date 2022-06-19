@@ -7,7 +7,7 @@ interface ProviderProps {
   children: ReactElement;
 }
 
-enableStaticRendering(true);
+enableStaticRendering(!typeof window);
 
 const StoreContext = createContext({});
 
@@ -21,7 +21,7 @@ export const StoreProvider = ({ initialValue, children }: ProviderProps) => {
 export const useStore = () => {
   const store = useContext(StoreContext) as Store;
   if (!store) {
-    throw new Error("No Data");
+    throw new Error("No data");
   }
   return store;
 };

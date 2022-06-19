@@ -3,9 +3,13 @@ import { StoreProvider } from "store";
 import Layout from "../components/Layout";
 import "../styles/globals.scss";
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface PageProps extends AppProps {
+  initialValue: Record<any, any>;
+}
+
+function MyApp({ initialValue, Component, pageProps }: PageProps) {
   return (
-    <StoreProvider initialValue={{ user: {} }}>
+    <StoreProvider initialValue={initialValue}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
@@ -13,4 +17,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
+MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
+  const { userId, nickname, avatar } = ctx.req.cookies;
+
+  return {
+    initialValue: {
+      user: {
+        userInfo: {
+          userId,
+          nickname,
+          avatar,
+        },
+      },
+    },
+  };
+};
 export default MyApp;

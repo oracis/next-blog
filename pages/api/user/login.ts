@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import "reflect-metadata";
 import { withIronSessionApiRoute } from "iron-session/next";
+import { Cookie } from "next-cookie";
 import { ironOptions } from "configs";
 import { User, UserAuth } from "db/entity/";
 import { ISession } from "pages/api/index";
 import { prepareConnection } from "db";
+import { setCookies } from "utils";
 
 const login = async (req: NextApiRequest, res: NextApiResponse) => {
+  const cookie = Cookie.fromApiRoute(req, res);
   const { smsCode = "", phone = "", identify_type = "phone" } = req?.body;
   const session = req.session as ISession;
   const savedSmsCode = session.smsCode;
@@ -31,6 +33,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
       session.nickname = nickname;
       session.avatar = avatar;
       await session.save();
+      setCookies(cookie, { userId: id, nickname, avatar });
       return res.status(200).json({
         code: 0,
         msg: "Login Sucessfully",
@@ -58,6 +61,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
       session.nickname = nickname;
       session.avatar = avatar;
       await session.save();
+      setCookies(cookie, { userId: id, nickname, avatar });
 
       return res.status(200).json({
         code: 0,
