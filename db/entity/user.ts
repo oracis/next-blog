@@ -1,6 +1,6 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: "users"})
+@Entity({ name: "users" })
 export class User {
   @PrimaryGeneratedColumn()
   readonly id!: number;

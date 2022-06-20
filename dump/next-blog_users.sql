@@ -16,32 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user_auths`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `user_auths`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_auths` (
+CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `identifier` varchar(255) DEFAULT NULL,
-  `identify_type` varchar(255) DEFAULT NULL,
-  `credential` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  `nickname` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `job` varchar(255) DEFAULT NULL,
+  `introduce` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_auths`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `user_auths` WRITE;
-/*!40000 ALTER TABLE `user_auths` DISABLE KEYS */;
-INSERT INTO `user_auths` VALUES (1,2,'18118107793','phone','7666'),(2,3,'11111111111','phone','5588');
-/*!40000 ALTER TABLE `user_auths` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'robin',NULL,'Front','NextJs'),(2,'User_524','/images/avata.png','Not available','Not available'),(3,'User_300','/images/avata.png','Not available','Not available');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-19 19:34:36
+-- Dump completed on 2022-06-20 23:20:23
