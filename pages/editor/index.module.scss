@@ -1,0 +1,16 @@
+.container {
+    .operation {
+        display: flex;
+        margin: 15px 0;
+        justify-content: space-between;
+        .title {
+            flex: 1
+        }
+
+        .button {
+            margin: 0 10px;
+            width: 10%;
+            text-transform: uppercase;
+        }
+    }
+}

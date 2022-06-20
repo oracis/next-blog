@@ -7,18 +7,39 @@ interface PageProps extends AppProps {
   initialValue: Record<any, any>;
 }
 
-function MyApp({ initialValue, Component, pageProps }: PageProps) {
-  return (
-    <StoreProvider initialValue={initialValue}>
+function renderComponent({ Component, pageProps }: PageProps) {
+  if ((Component as any).layout === false) {
+    return <Component {...pageProps} />;
+  } else {
+    return (
       <Layout>
         <Component {...pageProps} />
       </Layout>
+    );
+  }
+}
+
+function MyApp({ initialValue, Component, pageProps }: PageProps) {
+  function renderComponent() {
+    if ((Component as any).layout === false) {
+      return <Component {...pageProps} />;
+    } else {
+      return (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      );
+    }
+  }
+  return (
+    <StoreProvider initialValue={initialValue}>
+      {renderComponent()}
     </StoreProvider>
   );
 }
 
 MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
-  const { userId, nickname, avatar } = ctx.req.cookies;
+  const { userId, nickname, avatar } = ctx?.req?.cookies || {};
 
   return {
     initialValue: {

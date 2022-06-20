@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-import { Avatar, Button, Dropdown, Menu } from "antd";
+import { Avatar, Button, Dropdown, Menu, message } from "antd";
 import { ProfileOutlined, LogoutOutlined } from "@ant-design/icons";
 import navs from "./config";
 import Login from "components/Login";
@@ -11,14 +11,18 @@ import { useStore } from "store";
 import request from "service/request";
 
 const Navbar = () => {
-  const { pathname } = useRouter();
+  const { pathname, push } = useRouter();
   const store = useStore();
   const { userId, avatar } = store.user.userInfo;
 
   const [isShowLogin, setIsShowLogin] = useState(false);
 
   const handleWrite = () => {
-    console.log("write");
+    if (userId) {
+      push("/editor/new");
+    } else {
+      message.warning("Please login firstly!");
+    }
   };
 
   const handleLogin = () => {
@@ -29,7 +33,9 @@ const Navbar = () => {
     setIsShowLogin(false);
   };
 
-  const handleGotoPersonalPage = () => {};
+  const handleGotoPersonalPage = () => {
+    push(`/user/${userId}`);
+  };
 
   const handleLogout = () => {
     request.post("/api/user/logout").then((res: any) => {
