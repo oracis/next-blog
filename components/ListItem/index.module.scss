@@ -1,0 +1,109 @@
+.container {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e6eb;
+
+    .article {
+        display: flex;
+        padding-bottom: 12px;
+        flex-direction: column;
+        flex: 1;
+        position: relative;
+    
+        .userInfo {
+            display: flex;
+            align-items: center;
+            color: #4e5969;
+    
+            .name {
+                display: flex;
+                align-items: center;
+                margin-right: 8px;
+                max-width: 162px;
+                font-size: 13px;
+                line-height: 22px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: break-all;
+            }
+    
+            .date {
+                position: relative;
+                padding: 0 10px;
+                line-height: 22px;
+                font-size: 13px;
+                flex-shrink: 0;
+    
+                &::before, &::after {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    display: block;
+                    width: 1px;
+                    height: 14px;
+                    background: #e5e6eb;
+                    content: " ";
+                }
+
+                &::before {
+                    left: 0;
+                }
+
+                &::after {
+                    right: 0;
+                }
+            }
+        }
+    
+        .title {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #1d2129;
+            width: 100%;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+    
+        .content {
+            color: #86909c;
+            font-size: 13px;
+            line-height: 22px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+    
+        .statistics {
+            position: relative;
+            margin-right: 20px;
+            font-size: 13px;
+            line-height: 20px;
+            color: #4e5969;
+            flex-shrink: 0;
+    
+            .views {
+                margin-left: 4px;
+            }
+        }
+    }
+
+    .avatar {
+        flex: 0 0 auto;
+        width: 120px;
+        height: 80px;
+        margin-left: 24px;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+}
+

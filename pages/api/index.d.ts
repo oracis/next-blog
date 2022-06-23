@@ -15,3 +15,26 @@ export interface SmsResult {
   templateSMS?: {};
   statusMsg?: String;
 }
+
+export interface UserType {
+  id: number;
+  nickname: string;
+  avatar: string;
+  job: string;
+  introduce: string;
+}
+
+export interface ArticleType {
+  id: number;
+  title: string;
+  content: string;
+  views: number;
+  create_date: Date;
+  update_date: Date;
+  is_deleted: boolean;
+  user: User;
+}
+
+export interface HomePropsType {
+  articles: ArticleType[];
+}

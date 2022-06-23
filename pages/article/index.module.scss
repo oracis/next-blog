@@ -1,0 +1,56 @@
+.articleDetail {
+    .title {
+        margin: 0 0 24px;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 40px;
+        color: #252933;
+    }
+
+    .userContainer {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+
+        .userInfo {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            .name {
+                display: inline-block;
+                width: 100%;
+                font-size: 14px;
+                font-weight: 500;
+                color: #515767;
+                line-height: 22px;
+            }
+
+            .dateWrapper{
+                font-size: 12px;
+                color: #8a919f;
+                margin-top: 2px;
+                line-height: 22px;
+                display: flex;
+
+                .date {
+                    letter-spacing: 1px;
+                }
+
+                .views {
+                    margin-right: 15px;
+                }
+
+                .editLink {
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    .markdown {
+        img {
+            width: 100%;
+        }
+    }
+}
