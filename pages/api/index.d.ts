@@ -24,6 +24,15 @@ export interface UserType {
   introduce: string;
 }
 
+export interface CommentType {
+  id: number;
+  content: string;
+  create_date: Date;
+  update_date: Date;
+  user: User;
+  article: Article;
+}
+
 export interface ArticleType {
   id: number;
   title: string;
@@ -33,6 +42,7 @@ export interface ArticleType {
   update_date: Date;
   is_deleted: boolean;
   user: User;
+  comments: CommentType[];
 }
 
 export interface HomePropsType {

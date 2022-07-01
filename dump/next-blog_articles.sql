@@ -32,7 +32,7 @@ CREATE TABLE `articles` (
   `is_deleted` bit(1) DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `articles` (
 
 LOCK TABLES `articles` WRITE;
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` VALUES (1,'一篇文章','文章内容',0,'2022-06-20 22:48:42','2022-06-20 22:48:42',_binary '\0',2),(2,'文章标题2','写了一篇好文章',0,'2022-06-20 22:59:46','2022-06-20 22:59:46',_binary '\0',2);
+INSERT INTO `articles` VALUES (1,'一篇文章','文章内容',0,'2022-06-20 22:48:42','2022-06-20 22:48:42',_binary '\0',2),(2,'文章标题2','写了一篇好文章',0,'2022-06-20 22:59:46','2022-06-20 22:59:46',_binary '\0',2),(3,'测试文章3','##test\n\n```\nvar s = 1;\n```',3,'2022-06-21 22:07:34','2022-06-21 22:07:34',_binary '\0',2),(4,'article 1uyio','## test \n> great\n\n```\nvart js = window\n```\n\n![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4669cbe9d7d04ad2bed5831a42d60b0a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp?)',31,'2022-06-22 14:47:52','2022-06-23 16:56:24',_binary '\0',2);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-20 23:20:23
+-- Dump completed on 2022-07-01 17:08:41

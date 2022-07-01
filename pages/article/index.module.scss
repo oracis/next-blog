@@ -54,3 +54,77 @@
         }
     }
 }
+
+.divider {
+    width: 100%;
+    height: 20px;
+    background: #f4f5f5;
+}
+
+.addComment {
+    position: relative;
+   
+    .title {
+        font-size: 24px;
+        text-transform: uppercase;
+    }
+
+    .addCommentContent {
+        display: flex;
+        align-items: center;
+
+        .contentWrapper {
+            flex: 1;
+            margin-left: 10px;
+
+            .button {
+                margin-top: 10px;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+.commentList {
+    .commentItem {
+        display: flex;
+        align-items: flex-start;
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin-left: 10px;
+
+            .info {
+                display: flex;
+                justify-content: space-between;
+
+                .name {
+                    font-weight: 500;
+                    font-size: 15px;
+                    color: #252933;
+                    max-width: 90px;
+                    line-height: 26px;
+                }
+
+                .date {
+                    font-size: 14px;
+                    color: #8a919f;
+                    line-height: 22px;
+                }
+            }
+
+            .content {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 2rem;
+                color: #515767;
+                margin-top: 8px;
+                -webkit-line-clamp: 6;
+            }
+        }
+
+
+    }
+}
